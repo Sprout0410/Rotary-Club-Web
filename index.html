@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>躍齡扶輪社官方網站 | Yue-Ling Rotary Club</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-top">
+      <div class="logo">
+        <a href="index.html">
+          <div class="logo-img">Rotary</div>
+          <span>躍齡扶輪社 Official Club</span>
+        </a>
+      </div>
+
+      <div class="user-login-area" id="loginBtnWrap" onclick="toggleLoginModal()">
+        <div class="avatar" id="userAvatar">User</div>
+        <span class="login-text" id="loginStatusText">未登入 / 請登入</span>
+      </div>
+    </div>
+
+    <nav>
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="about.html">關於我們 (About Us) ▾</a>
+          <ul class="dropdown">
+            <li><a href="about.html#history">創社歷史與宗旨</a></li>
+            <li><a href="about.html#presidents">歷屆社長與幹部</a></li>
+            <li><a href="about.html#members">現任社友名錄</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="news.html">最新消息 (News) ▾</a>
+          <ul class="dropdown">
+            <li><a href="news.html#meeting">例會時間與地點公告</a></li>
+            <li><a href="news.html#calendar">重大行事曆</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="events.html">活動與展覽 (Events) ▾</a>
+          <ul class="dropdown">
+            <li><a href="events.html#gallery">活動相簿</a></li>
+            <li><a href="events.html#register">線上活動報名表單</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="#" onclick="checkMemberAccess('portal'); return false;">社友專區 (Members Portal)</a>
+        </li>
+
+        <li class="nav-item">
+          <a href="contact.html">聯絡我們 (Contact)</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero-slider" id="heroSlider">
+    <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1600&auto=format&fit=crop&q=80');">
+      <div class="slide-content">
+        <h2>【 重大活動展示區 A 】</h2>
+        <a href="news.html" class="btn">瞭解更多資訊 ➔</a>
+      </div>
+    </div>
+
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?w=1600&auto=format&fit=crop&q=80');">
+      <div class="slide-content">
+        <h2>【 重大活動展示區 B 】</h2>
+        <a href="news.html" class="btn">瞭解更多資訊 ➔</a>
+      </div>
+    </div>
+
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1600&auto=format&fit=crop&q=80');">
+      <div class="slide-content">
+        <h2>【 重大活動展示區 C 】</h2>
+        <a href="events.html#register" class="btn">前往報名</a>
+      </div>
+    </div>
+
+    <button class="slider-btn prev-btn" onclick="changeSlide(-1)">&#10094;</button>
+    <button class="slider-btn next-btn" onclick="changeSlide(1)">&#10095;</button>
+  </section>
+
+  <main class="container">
+    
+    <div class="grid-4">
+      
+      <div class="card">
+        <div class="card-header">
+          <span>歷任會長與成員</span>
+          <a href="about.html#presidents" style="font-size: 0.8rem; text-decoration: underline;">查看全部</a>
+        </div>
+        <div class="card-body" style="position: relative; padding: 10px; display: flex; align-items: center; justify-content: center;">
+          <div class="pres-slider-wrap">
+            
+            <div class="pres-slide active">
+              <div style="width: 110px; height: 110px; background-color: #3E6B89; border-radius: 50%; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">色塊 A</div>
+              <h4 class="pres-name">社長 A</h4>
+              <p class="pres-desc">任期 / 屆數欄位</p>
+            </div>
+
+            <div class="pres-slide">
+              <div style="width: 110px; height: 110px; background-color: #D9822B; border-radius: 50%; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">色塊 B</div>
+              <h4 class="pres-name">社長 B</h4>
+              <p class="pres-desc">任期 / 屆數欄位</p>
+            </div>
+
+            <div class="pres-slide">
+              <div style="width: 110px; height: 110px; background-color: #2E8B57; border-radius: 50%; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">色塊 C</div>
+              <h4 class="pres-name">社長 C</h4>
+              <p class="pres-desc">任期 / 屆數欄位</p>
+            </div>
+
+            <div class="pres-slide">
+              <div style="width: 110px; height: 110px; background-color: #8E44AD; border-radius: 50%; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">色塊 D</div>
+              <h4 class="pres-name">社長 D</h4>
+              <p class="pres-desc">任期 / 屆數欄位</p>
+            </div>
+
+            <div class="pres-slide">
+              <div style="width: 110px; height: 110px; background-color: #C0392B; border-radius: 50%; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">色塊 E</div>
+              <h4 class="pres-name">社長 E</h4>
+              <p class="pres-desc">任期 / 屆數欄位</p>
+            </div>
+
+            <button class="pres-btn pres-prev" onclick="changePresSlide(-1)">&#10094;</button>
+            <button class="pres-btn pres-next" onclick="changePresSlide(1)">&#10095;</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span>臉書官方粉絲團</span>
+          <a href="https://www.facebook.com/beyondage20210321/?locale=zh_TW" target="_blank" style="font-size: 0.8rem; text-decoration: underline; color: inherit;">追蹤我們</a>
+        </div>
+        <div class="card-body" style="padding: 10px 0 0 0; overflow: hidden; display: flex; justify-content: center; background-color: #fff;">
+          <div style="width: 340px; transform: scale(0.88); transform-origin: top center; margin-bottom: -40px;">
+            <iframe 
+              src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fbeyondage20210321&tabs=timeline&width=340&height=380&small_header=true&adapt_container_width=false&hide_cover=true&show_facepile=false&appId" 
+              width="340" 
+              height="380" 
+              style="border:none; overflow:hidden; width: 340px; height: 380px;" 
+              scrolling="no" 
+              frameborder="0" 
+              allowfullscreen="true" 
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span>歷史活動紀錄</span>
+          <a href="events.html#gallery" style="font-size: 0.8rem; text-decoration: underline;">進入專區</a>
+        </div>
+        <div class="card-body">
+          <div class="marquee-list">
+            <div class="list-item" onclick="location.href='events.html#records'" style="cursor: pointer;">
+              <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=150&auto=format&fit=crop&q=80" alt="歷史活動">
+              <div class="item-info">
+                <h4>【 歷史活動紀錄 A 】</h4>
+                <p>活動標籤 / 日期欄位</p>
+              </div>
+            </div>
+            <div class="list-item" onclick="location.href='events.html#records'" style="cursor: pointer;">
+              <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=150&auto=format&fit=crop&q=80" alt="歷史活動">
+              <div class="item-info">
+                <h4>【 歷史活動紀錄 B 】</h4>
+                <p>活動標籤 / 日期欄位</p>
+              </div>
+            </div>
+            <div class="list-item" onclick="location.href='events.html#records'" style="cursor: pointer;">
+              <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=150&auto=format&fit=crop&q=80" alt="歷史活動">
+              <div class="item-info">
+                <h4>【 歷史活動紀錄 C 】</h4>
+                <p>活動標籤 / 日期欄位</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header" style="background-color: #A82020;">
+          <span>現時與近期活動</span>
+          <a href="events.html#register" style="font-size: 0.8rem; text-decoration: underline;">線上報名</a>
+        </div>
+        <div class="card-body">
+          <div class="marquee-list">
+            <div class="list-item" style="border-left: 4px solid #A82020; background-color: #FFF5F5;">
+              <div class="item-info" style="width: 100%;">
+                <span style="font-size: 0.75rem; background: #A82020; color: white; padding: 2px 6px; border-radius: 4px;">開放報名中</span>
+                <h4 style="margin-top: 5px; color: #A82020;">【 近期活動項目 A 】</h4>
+                <p style="margin-bottom: 8px;">時間欄位 / 地點資訊欄位</p>
+                <a href="events.html#register" class="btn" style="padding: 4px 12px; font-size: 0.8rem; width: 100%; text-align: center;">點此填寫報名表單</a>
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="item-info">
+                <span style="font-size: 0.75rem; background: #666; color: white; padding: 2px 6px; border-radius: 4px;">籌備中</span>
+                <h4 style="margin-top: 5px;">【 近期活動項目 B 】</h4>
+                <p>時間欄位 / 備註說明欄位</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 躍齡扶輪社官方網站示範平台 | Yue-Ling Rotary Club Demonstration Website</p>
+    <p style="font-size: 0.8rem; margin-top: 5px;">本系統架構由開發者設計，提供現任會長與幹部最便捷的內容維護體驗。</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

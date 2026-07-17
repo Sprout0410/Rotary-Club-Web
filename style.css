@@ -1,0 +1,571 @@
+/* =========================================
+   躍齡扶輪社官方網站 - 共用樣式表 (style.css)
+   ========================================= */
+
+:root {
+  --primary-color: #00246B;      /* 品牌主色：深藍 */
+  --secondary-color: #F8B400;    /* 品牌輔色：金黃 */
+  --accent-color: #0077B6;       /* 互動標示色：亮藍 */
+  --text-dark: #2B2D42;
+  --text-light: #F8F9FA;
+  --bg-light: #F4F6F9;
+  --white: #FFFFFF;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Helvetica Neue', Arial, '微軟正黑體', sans-serif;
+}
+
+body {
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* --- 頂部導航列 --- */
+header {
+  background-color: var(--white);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  border-bottom: 1px solid #EAEAEA;
+}
+
+.logo a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.logo-img {
+  width: 45px;
+  height: 45px;
+  background-color: var(--secondary-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+/* 右上角登入區塊 */
+.user-login-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background-color: #EBF2FA;
+  transition: var(--transition);
+}
+
+.user-login-area:hover {
+  background-color: #D5E5F5;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #B0C4DE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--white);
+}
+
+.login-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* 下拉選單導覽列 */
+nav {
+  background-color: var(--primary-color);
+}
+
+.nav-list {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-item > a {
+  display: block;
+  padding: 15px 25px;
+  color: var(--text-light);
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.nav-item > a:hover, .nav-item:hover > a {
+  background-color: var(--accent-color);
+  color: var(--secondary-color);
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--white);
+  min-width: 200px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: var(--transition);
+  z-index: 100;
+  border-top: 3px solid var(--secondary-color);
+}
+
+.nav-item:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown li a {
+  display: block;
+  padding: 12px 20px;
+  color: var(--text-dark);
+  border-bottom: 1px solid #F0F0F0;
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+.dropdown li a:hover {
+  background-color: #F8F9FA;
+  color: var(--accent-color);
+  padding-left: 25px;
+}
+
+/* --- 首頁輪播幻燈片 --- */
+.hero-slider {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.slide-content {
+  background: rgba(0, 36, 107, 0.75);
+  padding: 30px 50px;
+  border-radius: 8px;
+  text-align: center;
+  color: var(--white);
+  max-width: 600px;
+  border: 2px solid var(--secondary-color);
+}
+
+.slide-content h2 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  color: var(--secondary-color);
+}
+
+.slide-content p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 24px;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  font-weight: bold;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+.btn:hover {
+  background-color: var(--white);
+  transform: scale(1.05);
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  font-size: 2rem;
+  padding: 10px 15px;
+  cursor: pointer;
+  z-index: 10;
+  transition: var(--transition);
+}
+
+.slider-btn:hover {
+  background-color: var(--primary-color);
+}
+
+.prev-btn { left: 20px; }
+.next-btn { right: 20px; }
+
+/* --- 四格核心內容網格 --- */
+.container {
+  max-width: 1280px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: var(--secondary-color);
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: var(--white);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  border-top: 4px solid var(--primary-color);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.card-header {
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 12px 15px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-body {
+  padding: 15px;
+  flex: 1;
+  overflow-y: auto;
+  max-height: 350px;
+}
+
+/* 列表與跑馬燈共用設定 */
+.marquee-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background-color: var(--bg-light);
+  border-radius: 6px;
+  transition: var(--transition);
+}
+
+.list-item:hover {
+  background-color: #E2EAF4;
+}
+
+.list-item img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.item-info h4 {
+  font-size: 0.95rem;
+  color: var(--primary-color);
+}
+
+.item-info p {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* FB 模擬動態窗 */
+.fb-mockup {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  background: #fff;
+}
+
+.fb-post {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.fb-post-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.fb-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+}
+
+.fb-post-img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+/* --- 歷任會長微型輪播樣式 --- */
+.pres-slider-wrap {
+  width: 100%;
+  height: 280px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pres-slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transform: scale(0.95);
+}
+
+.pres-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+  z-index: 2;
+}
+
+.bounty-frame {
+  background: #E6D5AC;
+  border: 3px solid #5C3A21;
+  padding: 6px 12px 10px 12px;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.bounty-title {
+  display: block;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 900;
+  font-size: 0.8rem;
+  color: #5C3A21;
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #5C3A21;
+}
+
+.bounty-frame img {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border: 2px solid #333;
+  background-color: #ccc;
+}
+
+.pres-name {
+  font-size: 1.05rem;
+  color: var(--primary-color);
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.pres-desc {
+  font-size: 0.8rem;
+  color: #A82020;
+  font-weight: 600;
+}
+
+.pres-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 36, 107, 0.15);
+  color: var(--primary-color);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pres-btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.pres-prev { left: 5px; }
+.pres-next { right: 5px; }
+
+/* --- 內頁與分頁專用共用排版 --- */
+.page-banner {
+  background: linear-gradient(rgba(0, 36, 107, 0.8), rgba(0, 36, 107, 0.8)), url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=1200&auto=format&fit=crop&q=80');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+  margin-bottom: 40px;
+}
+
+.page-banner h1 {
+  font-size: 2.5rem;
+  color: var(--secondary-color);
+}
+
+.content-box {
+  background: var(--white);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  margin-bottom: 30px;
+}
+
+.content-box h3 {
+  color: var(--primary-color);
+  border-left: 4px solid var(--secondary-color);
+  padding-left: 12px;
+  margin-bottom: 15px;
+}
+
+/* --- 頁腳 --- */
+footer {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  text-align: center;
+  padding: 30px 20px;
+  margin-top: 60px;
+}
+
+footer p {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* --- 響應式調整 (RWD) --- */
+@media (max-width: 1024px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+  .header-top {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .nav-list {
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>活動與展覽 | 躍齡扶輪社官方網站</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* 空屋格局與表單框架展示專用微調樣式 */
+    .wireframe-box {
+      border: 2px dashed #B0C4DE;
+      background-color: #F8F9FA;
+      padding: 30px;
+      text-align: center;
+      border-radius: 6px;
+      color: #666;
+      margin-top: 15px;
+    }
+    .wireframe-box p {
+      font-size: 0.95rem;
+      color: #888;
+    }
+    /* 相簿網格框架 */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .gallery-card-clean {
+      background: var(--white);
+      border: 1px solid #EAEAEA;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .img-placeholder {
+      width: 100%;
+      height: 160px;
+      background-color: #E0E0E0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      font-size: 0.9rem;
+      border-bottom: 1px solid #CCC;
+    }
+    .gallery-info {
+      padding: 15px;
+      text-align: left;
+    }
+    /* 線上報名表單排版 */
+    .form-wrap {
+      max-width: 700px;
+      margin: 20px auto 0 auto;
+      background: var(--bg-light);
+      padding: 30px;
+      border-radius: 8px;
+      border-top: 4px solid var(--primary-color);
+      text-align: left;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      color: var(--primary-color);
+      margin-bottom: 8px;
+    }
+    .form-control {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #CCC;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    .form-control:focus {
+      border-color: var(--accent-color);
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 頂部導航列 (同步全站乾淨結構) -->
+  <header>
+    <div class="header-top">
+      <div class="logo">
+        <a href="index.html">
+          <div class="logo-img">Rotary</div>
+          <span>躍齡扶輪社 Official Club</span>
+        </a>
+      </div>
+      <div class="user-login-area" id="loginBtnWrap" onclick="toggleLoginModal()">
+        <div class="avatar" id="userAvatar">User</div>
+        <span class="login-text" id="loginStatusText">未登入 / 請登入</span>
+      </div>
+    </div>
+
+    <nav>
+      <ul class="nav-list">
+        <!-- A: 關於我們 -->
+        <li class="nav-item">
+          <a href="about.html">關於我們 (About Us) ▾</a>
+          <ul class="dropdown">
+            <li><a href="about.html#history">創社歷史與宗旨</a></li>
+            <li><a href="about.html#presidents">歷屆社長與幹部</a></li>
+            <li><a href="about.html#members">現任社友名錄</a></li>
+          </ul>
+        </li>
+
+        <!-- B: 最新消息 -->
+        <li class="nav-item">
+          <a href="news.html">最新消息 (News) ▾</a>
+          <ul class="dropdown">
+            <li><a href="news.html#meeting">例會時間與地點公告</a></li>
+            <li><a href="news.html#calendar">重大行事曆</a></li>
+          </ul>
+        </li>
+
+        <!-- C: 活動與展覽 (當前頁面高亮) -->
+        <li class="nav-item">
+          <a href="events.html" style="background-color: var(--accent-color); color: var(--secondary-color);">活動與展覽 (Events) ▾</a>
+          <ul class="dropdown">
+            <li><a href="events.html#gallery">活動相簿</a></li>
+            <li><a href="events.html#register">線上活動報名表單</a></li>
+          </ul>
+        </li>
+
+        <!-- D: 社友專區 -->
+        <li class="nav-item">
+          <a href="#" onclick="checkMemberAccess('portal'); return false;">社友專區 (Members Portal)</a>
+        </li>
+
+        <!-- E: 聯絡我們 -->
+        <li class="nav-item">
+          <a href="contact.html">聯絡我們 (Contact)</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- 頁面標題橫幅 (空屋格局：藍底色標示區塊) -->
+  <div style="background-color: var(--primary-color); color: white; text-align: center; padding: 50px 20px; margin-bottom: 40px;">
+    <h1 style="color: var(--secondary-color); font-size: 2.2rem;">活動與展覽 (Events)</h1>
+  </div>
+
+  <!-- 內容區塊 (展示動線與外框) -->
+  <main class="container">
+    
+    <!-- C1: 活動相簿 -->
+    <section class="content-box" id="gallery">
+      <h3>活動相簿</h3>
+      
+      <!-- 相簿網格框架 -->
+      <div class="gallery-grid">
+        <div class="gallery-card-clean">
+          <div class="img-placeholder">活動照片區 A</div>
+          <div class="gallery-info">
+            <h4 style="color: var(--primary-color); font-size: 1rem;">【 歷史活動紀錄名稱 A 】</h4>
+            <span style="font-size: 0.8rem; color: #888;">舉辦日期 / 標籤放置處</span>
+          </div>
+        </div>
+        
+        <div class="gallery-card-clean">
+          <div class="img-placeholder">活動照片區 B</div>
+          <div class="gallery-info">
+            <h4 style="color: var(--primary-color); font-size: 1rem;">【 歷史活動紀錄名稱 B 】</h4>
+            <span style="font-size: 0.8rem; color: #888;">舉辦日期 / 標籤放置處</span>
+          </div>
+        </div>
+
+        <div class="gallery-card-clean">
+          <div class="img-placeholder">活動照片區 C</div>
+          <div class="gallery-info">
+            <h4 style="color: var(--primary-color); font-size: 1rem;">【 歷史活動紀錄名稱 C 】</h4>
+            <span style="font-size: 0.8rem; color: #888;">舉辦日期 / 標籤放置處</span>
+          </div>
+        </div>
+
+        <div class="gallery-card-clean">
+          <div class="img-placeholder">活動照片區 D</div>
+          <div class="gallery-info">
+            <h4 style="color: var(--primary-color); font-size: 1rem;">【 歷史活動紀錄名稱 D 】</h4>
+            <span style="font-size: 0.8rem; color: #888;">舉辦日期 / 標籤放置處</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- C3: 線上活動報名表單 -->
+    <section class="content-box" id="register">
+      <h3>線上活動報名表單</h3>
+      
+      <!-- 互動表單框架 -->
+      <div class="form-wrap">
+        <form onsubmit="alert('模擬報名成功！未來此處將把報名資料發送到後端資料庫或 Google Sheets。'); return false;">
+          
+          <div class="form-group">
+            <label for="eventSelect">選擇欲報名之活動：</label>
+            <select id="eventSelect" class="form-control" required>
+              <option value="">-- 請選擇近期活動 --</option>
+              <option value="item1">【開放報名中】蛋糕島大戰：茶會救援跨社聯誼</option>
+              <option value="item2">【籌備中】和之國文化體驗暨武士道交流</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="participantRole">參與身份：</label>
+            <select id="participantRole" class="form-control" required>
+              <option value="member">本社社友</option>
+              <option value="family">寶眷 (親屬)</option>
+              <option value="guest">來賓 / 跨社友社社友</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="userName">報名姓名 / 社內暱稱：</label>
+            <input type="text" id="userName" class="form-control" placeholder="請輸入您的姓名" required>
+          </div>
+
+          <div class="form-group">
+            <label for="userPhone">聯絡電話 / 手機：</label>
+            <input type="tel" id="userPhone" class="form-control" placeholder="請輸入聯絡電話">
+          </div>
+
+          <div class="form-group">
+            <label for="userNote">特殊備註 (如：素食、攜帶人數)：</label>
+            <textarea id="userNote" class="form-control" rows="3" placeholder="若有特別需求請在此填寫..."></textarea>
+          </div>
+
+          <div style="text-align: center; margin-top: 10px;">
+            <button type="submit" class="btn" style="width: 100%; font-size: 1.05rem;">確認送出報名</button>
+          </div>
+
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 頁腳 -->
+  <footer>
+    <p>© 2026 躍齡扶輪社官方網站示範平台 | Yue-Ling Rotary Club Demonstration Website</p>
+    <p style="font-size: 0.8rem; margin-top: 5px;">本系統架構由開發者設計，提供現任會長與幹部最便捷的內容維護體驗。</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
