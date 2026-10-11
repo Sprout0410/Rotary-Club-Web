@@ -290,7 +290,7 @@ const DB = (function () {
 })();
 
 /* =========================================
-   5. 預設資料（第一次開啟網站時建立）
+   5. 初始資料（只建立開發者帳號；舊版示範資料自動清除）
    ========================================= */
 const DEV_ACCOUNT_ID = 'u_dev_sprout';
 
@@ -310,148 +310,50 @@ function devAccount() {
   };
 }
 
-function placeholderImage(text, color) {
-  const c = document.createElement('canvas');
-  c.width = 960;
-  c.height = 640;
-  const g = c.getContext('2d');
-  const grd = g.createLinearGradient(0, 0, 960, 640);
-  grd.addColorStop(0, color);
-  grd.addColorStop(1, '#00246B');
-  g.fillStyle = grd;
-  g.fillRect(0, 0, 960, 640);
-  g.fillStyle = 'rgba(255,255,255,0.92)';
-  g.font = 'bold 54px sans-serif';
-  g.textAlign = 'center';
-  g.textBaseline = 'middle';
-  g.fillText(text, 480, 320);
-  return c.toDataURL('image/jpeg', 0.8);
-}
+/* 舊版內建的示範資料 ID：升級時一併清除（管理員自己新增的資料不受影響） */
+const DEMO_IDS = {
+  presidents: ['pres_1', 'pres_2', 'pres_3', 'pres_4', 'pres_5'],
+  members: ['mem_1', 'mem_2', 'mem_3', 'mem_4', 'mem_5', 'mem_6'],
+  events: ['ev_demo_1', 'ev_demo_2'],
+  registrations: ['reg_demo_1', 'reg_demo_2', 'reg_demo_3'],
+  albums: ['alb_demo_2025'],
+  photos: ['pho_demo_1', 'pho_demo_2', 'pho_demo_3'],
+  images: ['img_demo_1', 'img_demo_2', 'img_demo_3'],
+  calendar: ['cal_1', 'cal_2', 'cal_3', 'cal_4'],
+  slides: ['sld_1', 'sld_2', 'sld_3']
+};
+// 文字區塊只在「還是預設示範文字」時才清空，已編輯過的保留
+const DEMO_BLOCK_MARKERS = {
+  'about.history': '【 文字內容放置區塊 】',
+  meeting: '（示範資料）',
+  'contact.traffic': '【 交通與停車指南 】'
+};
 
-async function seedDemoData() {
-  const t = RC.now();
-
-  const presidents = [
-    ['創社社長', '蒙其·D·魯夫', '#3E6B89'],
-    ['第 2 屆社長', '紅髮香克斯', '#D9822B'],
-    ['第 3 屆社長', '愛德華·紐蓋特', '#2E8B57'],
-    ['第 4 屆社長', '千兩小丑巴其', '#8E44AD'],
-    ['第 5 屆社長', '百獸凱多', '#C0392B']
-  ];
-  for (let i = 0; i < presidents.length; i++) {
-    const [term, name, color] = presidents[i];
-    await DB.put('presidents', { id: 'pres_' + (i + 1), term, name, years: '任期欄位', color, photoImg: '', order: i + 1, createdAt: t });
+async function purgeDemoData() {
+  for (const [store, ids] of Object.entries(DEMO_IDS)) {
+    for (const id of ids) await DB.del(store, id);
   }
-
-  const memberNames = ['A', 'B', 'C', 'D', 'E', 'F'];
-  for (let i = 0; i < memberNames.length; i++) {
-    await DB.put('members', { id: 'mem_' + (i + 1), name: '社員 ' + memberNames[i], title: '職稱 / 職業欄位', photoImg: '', order: i + 1, createdAt: t });
+  for (const [id, marker] of Object.entries(DEMO_BLOCK_MARKERS)) {
+    const b = await DB.get('blocks', id);
+    if (b && JSON.stringify(b).includes(marker)) await DB.del('blocks', id);
   }
-
-  // 示範相簿：去年同一活動的照片
-  const albumId = 'alb_demo_2025';
-  await DB.put('albums', {
-    id: albumId, title: '2025 蛋糕島跨社聯誼', date: '2025-11-16',
-    description: '去年同一活動的照片（示範資料，可刪除）', coverImg: '', createdAt: t
-  });
-  const colors = ['#D9822B', '#2E8B57', '#8E44AD'];
-  for (let i = 0; i < 3; i++) {
-    const imgId = 'img_demo_' + (i + 1);
-    await DB.put('images', { id: imgId, dataUrl: placeholderImage(`示範照片 ${i + 1}`, colors[i]), createdAt: t });
-    await DB.put('photos', { id: 'pho_demo_' + (i + 1), albumId, imageId: imgId, caption: '', createdAt: t });
-  }
-
-  const nextYear = new Date().getFullYear() + (new Date().getMonth() >= 10 ? 1 : 0);
-  await DB.put('events', {
-    id: 'ev_demo_1',
-    title: '蛋糕島大戰：茶會救援跨社聯誼',
-    status: 'open',
-    summary: '年度跨社聯誼茶會，歡迎社友攜家帶眷參加！（示範資料，可編輯或刪除）',
-    content: '活動流程：\n14:00 報到\n14:30 開場致詞\n15:00 茶會與交流\n17:00 合照與賦歸',
-    startAt: `${nextYear}-11-15T14:00`,
-    endAt: `${nextYear}-11-15T17:00`,
-    location: '地點資訊欄位',
-    deadline: '',
-    capacity: 60,
-    posterImg: '',
-    regMode: 'internal',
-    externalUrl: '',
-    fields: [{ id: 'f_diet', label: '飲食需求', type: 'select', options: ['葷食', '素食'], required: true }],
-    albumIds: [albumId],
-    createdAt: t,
-    updatedAt: t
-  });
-  await DB.put('events', {
-    id: 'ev_demo_2',
-    title: '和之國文化體驗暨武士道交流',
-    status: 'preparing',
-    summary: '活動籌備中，詳細資訊將於近期公布。（示範資料）',
-    content: '',
-    startAt: `${nextYear + 1}-01-10T10:00`,
-    endAt: '',
-    location: '',
-    deadline: '',
-    capacity: 0,
-    posterImg: '',
-    regMode: 'none',
-    externalUrl: '',
-    fields: [],
-    albumIds: [],
-    createdAt: t,
-    updatedAt: t
-  });
-
-  const demoRegs = [['王小明', 3], ['陳美玲', 1], ['林志豪', 2]];
-  for (let i = 0; i < demoRegs.length; i++) {
-    await DB.put('registrations', {
-      id: 'reg_demo_' + (i + 1), eventId: 'ev_demo_1', name: demoRegs[i][0], contact: '0900-000-00' + i,
-      headcount: demoRegs[i][1], answers: { f_diet: '葷食' }, note: '', userId: '', createdAt: t
-    });
+  // 活動若連結到已刪除的示範相簿，順便移除連結
+  for (const ev of await DB.all('events')) {
+    const ids = (ev.albumIds || []).filter((x) => !DEMO_IDS.albums.includes(x));
+    if (ids.length !== (ev.albumIds || []).length) {
+      ev.albumIds = ids;
+      await DB.put('events', ev);
+    }
   }
 }
 
-// 第 2 版：首頁展示區、可編輯文字區塊、重大行事曆
-async function seedV2Data() {
-  const t = RC.now();
-  const slides = [
-    ['【 重大活動展示區 A 】', '瞭解更多資訊 ➔', 'news.html', 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1600&auto=format&fit=crop&q=80'],
-    ['【 重大活動展示區 B 】', '瞭解更多資訊 ➔', 'news.html', 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=1600&auto=format&fit=crop&q=80'],
-    ['【 重大活動展示區 C 】', '前往報名', 'events.html#register', 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1600&auto=format&fit=crop&q=80']
-  ];
-  for (let i = 0; i < slides.length; i++) {
-    const [title, buttonText, link, imageUrl] = slides[i];
-    await DB.put('slides', { id: 'sld_' + (i + 1), title, buttonText, link, imageUrl, photoImg: '', enabled: true, order: i + 1, createdAt: t });
-  }
-
-  await DB.put('blocks', { id: 'about.history', body: '【 文字內容放置區塊 】\n（管理員登入後，點右上角「編輯」即可修改這段內容）', updatedAt: t });
-  await DB.put('blocks', {
-    id: 'meeting',
-    time: '每月第一、三週 星期○ 晚上 7:00（示範資料）',
-    place: '例會地點名稱',
-    address: '',
-    contact: '',
-    note: '如遇國定假日或特殊活動，例會時間將另行公告。',
-    updatedAt: t
-  });
-  await DB.put('blocks', { id: 'contact.traffic', body: '【 交通與停車指南 】\n捷運：\n公車：\n停車：', updatedAt: t });
-
-  const cal = [['2026 年度 Q3', 'A'], ['2026 年度 Q3', 'B'], ['2026 年度 Q4', 'C'], ['2026 年度 Q4', 'D']];
-  for (let i = 0; i < cal.length; i++) {
-    await DB.put('calendar', {
-      id: 'cal_' + (i + 1), dateLabel: cal[i][0], title: `【 季度重大行事曆項目 ${cal[i][1]} 】`,
-      description: '標籤欄位 / 說明文字放置區', link: '', order: i + 1, createdAt: t
-    });
-  }
-}
+const SEED_VERSION = 3;   // 第 3 版起：不再內建示範資料，網站從空白開始
 
 async function seed() {
   const meta = await DB.get('meta', 'seed');
-  if (!meta) {
-    await seedDemoData();
-  }
-  if (!meta || (meta.version || 1) < 2) {
-    await seedV2Data();
-    await DB.put('meta', { id: 'seed', version: 2, at: RC.now() });
+  if (!meta || (meta.version || 1) < SEED_VERSION) {
+    if (meta) await purgeDemoData();
+    await DB.put('meta', { id: 'seed', version: SEED_VERSION, at: RC.now() });
   }
   // 開發者帳號一律存在（被誤刪時自動補回）
   if (!(await DB.get('users', DEV_ACCOUNT_ID))) await DB.put('users', devAccount());

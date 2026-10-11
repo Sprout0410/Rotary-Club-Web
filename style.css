@@ -1839,3 +1839,8 @@ body.modal-open { overflow: hidden; }
   margin-bottom: 0;
 }
 .form-group label.btn--primary { color: var(--white); }
+
+/* 首頁歷任社長卡：沒有資料時置中顯示 */
+.pres-empty { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.pres-btn[hidden] { display: none; }
+.slider-btn[hidden] { display: none; }

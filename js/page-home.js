@@ -30,6 +30,7 @@
   async function renderHero() {
     const box = document.getElementById('heroSlides');
     const slides = (await RC.api.slides.list()).filter((s) => s.enabled !== false);
+    document.querySelectorAll('.slider-btn').forEach((b) => { b.hidden = slides.length < 2; });
     if (!slides.length) {
       box.innerHTML = `<div class="slide active slide--empty"><div class="slide-content"><h2>躍齡扶輪社</h2>
         ${RC.auth.isAdmin() ? '<p>尚未設定展示內容，請點右上角「編輯展示區」新增。</p>' : ''}</div></div>`;
@@ -267,8 +268,10 @@
   async function renderPresidents() {
     const list = await RC.api.presidents.list();
     const box = document.getElementById('presSlides');
+    // 只有 0～1 位時不需要左右切換鈕
+    document.querySelectorAll('.pres-btn').forEach((b) => { b.hidden = list.length < 2; });
     if (!list.length) {
-      box.innerHTML = '<p class="empty-state">尚無資料</p>';
+      box.innerHTML = '<p class="empty-state pres-empty">尚未建立歷任社長資料</p>';
       return;
     }
     box.innerHTML = list.map((p, i) => `
