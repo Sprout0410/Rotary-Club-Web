@@ -27,16 +27,4 @@
 
 活動若設為「籌備中」並填「報名開始時間」，時間到會自動改為開放報名。
 
-## 帳號
-- 開發者：Sprout / 890410（受保護，不能被刪除或降級；程式內只存雜湊值）
-- 一般申請：密碼至少 6 碼且需含英文字母與數字（`RC.config.PASSWORD_MIN_LENGTH` 可調）
 
-
-正式上線建議改接 Supabase：
-- users → Supabase Auth ＋ profiles 表（role、status），以 RLS 限制管理員權限
-- events / registrations / albums / photos / members / presidents → 同名資料表
-- images → Supabase Storage
-- 審核通知 → Edge Function ＋ Resend 自動寄信
-- 公開名單 → 建一個只回傳遮蔽姓名＋人數的 view，避免完整個資外流
-
-改接時只需改寫 js/main.js 的「4. 資料庫」與「8. RC.api」，頁面程式不用動。
