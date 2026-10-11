@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>建立新活動 | 躍齡扶輪社官方網站</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="events">
+
+  <!-- 頁首與導覽列由 js/main.js 產生（全站共用，只需改一處） -->
+  <header id="siteHeader"></header>
+
+  <div class="page-hero">
+    <h1 id="editTitle">建立新活動</h1>
+  </div>
+
+  <main class="container" id="editRoot">
+    <form id="eventForm" class="event-form" novalidate>
+
+      <section class="content-box">
+        <h3>基本資訊</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="evTitle">活動名稱 <span class="req">*</span></label>
+            <input type="text" id="evTitle" name="title" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="evStatus">活動狀態</label>
+            <select id="evStatus" name="status" class="form-control">
+              <option value="open">開放報名</option>
+              <option value="preparing">籌備中（先公告；有設報名開始時間會自動開放）</option>
+              <option value="closed">已結束（移到「已結束的活動」）</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="evSummary">活動大綱 <span class="req">*</span></label>
+          <textarea id="evSummary" name="summary" class="form-control" rows="3" placeholder="一兩句話介紹活動，會顯示在首頁與活動列表"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="evContent">活動詳細內容</label>
+          <textarea id="evContent" name="content" class="form-control" rows="8" placeholder="活動流程、注意事項、費用說明等"></textarea>
+        </div>
+      </section>
+
+      <section class="content-box">
+        <h3>活動時程與地點</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="evStart">開始時間 <span class="req">*</span></label>
+            <input type="datetime-local" id="evStart" name="startAt" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="evEnd">結束時間</label>
+            <input type="datetime-local" id="evEnd" name="endAt" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="evLocation">活動地點</label>
+          <input type="text" id="evLocation" name="location" class="form-control">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="evRegStart">報名開始時間</label>
+            <input type="datetime-local" id="evRegStart" name="regStartAt" class="form-control">
+            <p class="form-hint">活動狀態設為「籌備中」時，到這個時間會<strong>自動改為開放報名</strong>。</p>
+          </div>
+          <div class="form-group">
+            <label for="evDeadline">報名截止時間</label>
+            <input type="datetime-local" id="evDeadline" name="deadline" class="form-control">
+            <p class="form-hint">留空表示不限；超過時間會自動關閉報名。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-box">
+        <h3>活動海報</h3>
+        <div class="poster-editor">
+          <div class="poster-preview" id="posterPreview"></div>
+          <div>
+            <label class="btn btn--sm btn--primary">選擇海報圖片<input type="file" id="posterInput" accept="image/*" hidden></label>
+            <button type="button" class="btn btn--sm btn--ghost" id="removePoster" hidden>移除海報</button>
+            <p class="form-hint">建議直式海報（例如 A4 比例）。圖片會自動壓縮。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-box">
+        <h3>報名方式</h3>
+        <div class="radio-cards">
+          <label class="radio-card">
+            <input type="radio" name="regMode" value="internal">
+            <span><strong>使用本網站報名表單（推薦）</strong><small>報名資料存在網站，活動頁會顯示已報名名單與人數</small></span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="regMode" value="external">
+            <span><strong>使用外部表單連結</strong><small>例如 Google 表單；網站無法顯示報名名單</small></span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="regMode" value="none">
+            <span><strong>不開放線上報名</strong><small>僅公告活動資訊</small></span>
+          </label>
+        </div>
+
+        <div data-mode="internal">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="evCapacity">名額上限（人）</label>
+              <input type="number" id="evCapacity" name="capacity" class="form-control" min="0" placeholder="留空表示不限">
+              <p class="form-hint">以「同行總人數」加總計算，額滿會自動關閉報名。</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>報名表題目</label>
+            <p class="form-hint">固定題目：報名人姓名、同行總人數（含本人）、聯絡電話或 Email、備註。以下可再加自訂題目。</p>
+            <div id="fieldList" class="field-list"></div>
+            <button type="button" class="btn btn--sm btn--ghost" id="addField">＋ 新增自訂題目</button>
+          </div>
+        </div>
+
+        <div data-mode="external" hidden>
+          <div class="form-group">
+            <label for="externalUrl">外部報名表單連結 <span class="req">*</span></label>
+            <input type="url" id="externalUrl" name="externalUrl" class="form-control" placeholder="https://forms.gle/...">
+          </div>
+        </div>
+      </section>
+
+      <section class="content-box">
+        <h3>連結活動相簿</h3>
+        <p class="form-hint">勾選的相簿會顯示在活動頁面，適合放「往年同一活動」的照片。</p>
+        <div class="check-list" id="albumChecks"></div>
+      </section>
+
+      <p class="form-error" id="formError" hidden></p>
+      <div class="form-sticky-actions">
+        <button type="button" class="btn btn--ghost" id="cancelBtn">取消</button>
+        <button type="button" class="btn btn--danger" id="deleteBtn" hidden>刪除活動</button>
+        <button type="submit" class="btn btn--primary">儲存活動</button>
+      </div>
+    </form>
+  </main>
+
+  <footer id="siteFooter"></footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/page-event-edit.js"></script>
+</body>
+</html>

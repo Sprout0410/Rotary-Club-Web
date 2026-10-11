@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>帳號審核與權限管理 | 躍齡扶輪社官方網站</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="portal">
+
+  <!-- 頁首與導覽列由 js/main.js 產生（全站共用，只需改一處） -->
+  <header id="siteHeader"></header>
+
+  <div class="page-hero">
+    <h1>帳號審核與權限管理</h1>
+  </div>
+
+  <main class="container" id="adminRoot">
+    <section class="content-box">
+      <div class="tabs" role="tablist">
+        <button type="button" class="tab-btn active" data-tab="pending" role="tab">待審核申請 <span class="tab-count" id="pendingCount" hidden></span></button>
+        <button type="button" class="tab-btn" data-tab="accounts" role="tab">全部帳號</button>
+        <button type="button" class="tab-btn" data-tab="notices" role="tab">審核通知寄送 <span class="tab-count" id="noticeCount" hidden></span></button>
+        <button type="button" class="tab-btn" data-tab="backup" role="tab">資料備份</button>
+      </div>
+
+      <div class="tab-panel" data-panel="pending">
+        <div id="pendingList"><p class="empty-state">載入中…</p></div>
+      </div>
+
+      <div class="tab-panel" data-panel="accounts" hidden>
+        <div class="toolbar toolbar--start">
+          <input type="search" id="accountSearch" class="form-control form-control--search" placeholder="搜尋帳號、姓名、Email、電話">
+        </div>
+        <div id="accountList"></div>
+      </div>
+
+      <div class="tab-panel" data-panel="notices" hidden>
+        <div class="notice">
+          目前為單機示範版，網站本身無法自動寄信。點「開啟郵件軟體寄出」會開啟這台電腦的郵件程式並自動帶入收件人與內容，寄出後再按「標記為已寄出」。
+          正式上線接上後端後，可改為審核完自動寄出。
+        </div>
+        <div id="noticeList"></div>
+      </div>
+
+      <div class="tab-panel" data-panel="backup" hidden>
+        <div id="backupPanel"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="siteFooter"></footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/page-admin.js"></script>
+</body>
+</html>

@@ -5,202 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>最新消息 | 躍齡扶輪社官方網站</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    /* 空屋格局與行事曆框架展示專用微調樣式 */
-    .wireframe-box {
-      border: 2px dashed #B0C4DE;
-      background-color: #F8F9FA;
-      padding: 30px;
-      text-align: center;
-      border-radius: 6px;
-      color: #666;
-      margin-top: 15px;
-    }
-    .wireframe-box p {
-      font-size: 0.95rem;
-      color: #888;
-    }
-    /* 簡潔版行事曆列表框架 */
-    .calendar-list {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      margin-top: 15px;
-    }
-    .calendar-item-clean {
-      display: flex;
-      align-items: center;
-      background: var(--white);
-      border: 1px solid #EAEAEA;
-      border-left: 5px solid var(--primary-color);
-      border-radius: 4px;
-      padding: 15px 20px;
-      text-align: left;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-    }
-    .date-badge {
-      min-width: 120px;
-      font-weight: bold;
-      color: var(--primary-color);
-      font-size: 0.95rem;
-      border-right: 1px solid #DDD;
-      padding-right: 15px;
-      margin-right: 15px;
-    }
-    .event-detail h4 {
-      color: var(--text-dark);
-      font-size: 1rem;
-      margin-bottom: 4px;
-    }
-    .event-detail span {
-      font-size: 0.85rem;
-      color: #888;
-    }
-    @media (max-width: 600px) {
-      .calendar-item-clean {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .date-badge {
-        border-right: none;
-        border-bottom: 1px solid #DDD;
-        padding-right: 0;
-        padding-bottom: 5px;
-        margin-right: 0;
-        margin-bottom: 8px;
-        width: 100%;
-      }
-    }
-  </style>
 </head>
-<body>
+<body data-page="news">
 
-  <!-- 頂部導航列 (同步全站乾淨結構) -->
-  <header>
-    <div class="header-top">
-      <div class="logo">
-        <a href="index.html">
-          <div class="logo-img">Rotary</div>
-          <span>躍齡扶輪社 Official Club</span>
-        </a>
-      </div>
-      <div class="user-login-area" id="loginBtnWrap" onclick="toggleLoginModal()">
-        <div class="avatar" id="userAvatar">User</div>
-        <span class="login-text" id="loginStatusText">未登入 / 請登入</span>
-      </div>
-    </div>
+  <!-- 頁首與導覽列由 js/main.js 產生（全站共用，只需改一處） -->
+  <header id="siteHeader"></header>
 
-    <nav>
-      <ul class="nav-list">
-        <!-- A: 關於我們 -->
-        <li class="nav-item">
-          <a href="about.html">關於我們 (About Us) ▾</a>
-          <ul class="dropdown">
-            <li><a href="about.html#history">創社歷史與宗旨</a></li>
-            <li><a href="about.html#presidents">歷屆社長與幹部</a></li>
-            <li><a href="about.html#members">現任社友名錄</a></li>
-          </ul>
-        </li>
-
-        <!-- B: 最新消息 (當前頁面高亮) -->
-        <li class="nav-item">
-          <a href="news.html" style="background-color: var(--accent-color); color: var(--secondary-color);">最新消息 (News) ▾</a>
-          <ul class="dropdown">
-            <li><a href="news.html#meeting">例會時間與地點公告</a></li>
-            <li><a href="news.html#calendar">重大行事曆</a></li>
-          </ul>
-        </li>
-
-        <!-- C: 活動與展覽 -->
-        <li class="nav-item">
-          <a href="events.html">活動與展覽 (Events) ▾</a>
-          <ul class="dropdown">
-            <li><a href="events.html#gallery">活動相簿</a></li>
-            <li><a href="events.html#register">線上活動報名表單</a></li>
-          </ul>
-        </li>
-
-        <!-- D: 社友專區 -->
-        <li class="nav-item">
-          <a href="#" onclick="checkMemberAccess('portal'); return false;">社友專區 (Members Portal)</a>
-        </li>
-
-        <!-- E: 聯絡我們 -->
-        <li class="nav-item">
-          <a href="contact.html">聯絡我們 (Contact)</a>
-        </li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- 頁面標題橫幅 (空屋格局：藍底色標示區塊) -->
-  <div style="background-color: var(--primary-color); color: white; text-align: center; padding: 50px 20px; margin-bottom: 40px;">
-    <h1 style="color: var(--secondary-color); font-size: 2.2rem;">最新消息 (News)</h1> 
+  <div class="page-hero">
+    <h1>最新消息 (News)</h1>
   </div>
 
-  <!-- 內容區塊 (展示動線與外框) -->
   <main class="container">
-    
-    <!-- B1: 例會時間與地點公告 -->
+
+    <!-- B1: 例會時間與地點公告（與「聯絡我們」共用同一份資料） -->
     <section class="content-box" id="meeting">
-      <h3>例會時間與地點公告</h3>
-      
-      <!-- 空屋格局：文字與資訊放置框 -->
-      <div class="wireframe-box">
-        <strong style="color: var(--primary-color);">【 例會資訊公告文字區塊 】</strong>
+      <div class="section-head">
+        <h3>例會時間與地點公告</h3>
+        <div class="toolbar" id="meetingTools"></div>
       </div>
+      <div id="meetingBody"></div>
+      <p class="meta-text" id="meetingUpdated"></p>
     </section>
 
     <!-- B2: 重大行事曆 -->
     <section class="content-box" id="calendar">
-      <h3>重大行事曆</h3>
-      
-      <!-- 行事曆條列框架 -->
-      <div class="calendar-list">
-        
-        <div class="calendar-item-clean">
-          <div class="date-badge">2026 年度 Q3</div>
-          <div class="event-detail">
-            <h4>【 季度重大行事曆項目 A 】</h4>
-            <span>標籤欄位 / 說明文字放置區</span>
-          </div>
-        </div>
-
-        <div class="calendar-item-clean">
-          <div class="date-badge">2026 年度 Q3</div>
-          <div class="event-detail">
-            <h4>【 季度重大行事曆項目 B 】</h4>
-            <span>標籤欄位 / 說明文字放置區</span>
-          </div>
-        </div>
-
-        <div class="calendar-item-clean">
-          <div class="date-badge">2026 年度 Q4</div>
-          <div class="event-detail">
-            <h4>【 季度重大行事曆項目 C 】</h4>
-            <span>標籤欄位 / 說明文字放置區</span>
-          </div>
-        </div>
-
-        <div class="calendar-item-clean">
-          <div class="date-badge">2026 年度 Q4</div>
-          <div class="event-detail">
-            <h4>【 季度重大行事曆項目 D 】</h4>
-            <span>標籤欄位 / 說明文字放置區</span>
-          </div>
-        </div>
-
+      <div class="section-head">
+        <h3>重大行事曆</h3>
+        <div class="toolbar" id="calendarTools"></div>
       </div>
+      <div class="calendar-list" id="calendarList"></div>
     </section>
 
   </main>
 
-  <!-- 頁腳 -->
-  <footer>
-    <p>© 2026 躍齡扶輪社官方網站示範平台 | Yue-Ling Rotary Club Demonstration Website</p>
-    <p style="font-size: 0.8rem; margin-top: 5px;">本系統架構由開發者設計，提供現任會長與幹部最便捷的內容維護體驗。</p>
-  </footer>
+  <footer id="siteFooter"></footer>
 
-  <script src="main.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/page-news.js"></script>
 </body>
 </html>

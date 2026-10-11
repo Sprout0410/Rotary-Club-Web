@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>會員登入 | 躍齡扶輪社官方網站</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="login">
+
+  <!-- 頁首與導覽列由 js/main.js 產生（全站共用，只需改一處） -->
+  <header id="siteHeader"></header>
+
+  <div class="page-hero">
+    <h1>會員登入 (Login)</h1>
+  </div>
+
+  <main class="container">
+    <section class="content-box auth-box">
+      <div id="alreadyIn"></div>
+      <div class="tabs" role="tablist">
+        <button type="button" class="tab-btn active" data-tab="login" role="tab" aria-selected="true">登入</button>
+        <button type="button" class="tab-btn" data-tab="register" role="tab" aria-selected="false">申請帳號</button>
+      </div>
+
+      <div class="tab-panel" data-panel="login">
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="loginUser">帳號</label>
+            <input type="text" id="loginUser" name="username" class="form-control" autocomplete="username" required>
+          </div>
+          <div class="form-group">
+            <label for="loginPass">密碼</label>
+            <input type="password" id="loginPass" name="password" class="form-control" autocomplete="current-password" required>
+          </div>
+          <p class="form-error" id="loginError" hidden></p>
+          <button type="submit" class="btn btn--primary btn--block btn--lg">登入</button>
+          <p class="form-hint auth-hint">還沒有帳號？請點上方「申請帳號」，經管理員審核後即可登入。忘記密碼請聯絡管理員重設。</p>
+        </form>
+      </div>
+
+      <div class="tab-panel" data-panel="register" hidden>
+        <form id="registerForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="regUser">帳號 <span class="req">*</span></label>
+              <input type="text" id="regUser" name="username" class="form-control" autocomplete="username" required>
+              <p class="form-hint">3–20 個英文字母、數字或 _ . -</p>
+            </div>
+            <div class="form-group">
+              <label for="regDisplay">姓名 <span class="req">*</span></label>
+              <input type="text" id="regDisplay" name="displayName" class="form-control" autocomplete="name" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="regPass">密碼 <span class="req">*</span></label>
+              <input type="password" id="regPass" name="password" class="form-control" autocomplete="new-password" required>
+              <p class="form-hint" id="pwRule"></p>
+            </div>
+            <div class="form-group">
+              <label for="regPass2">確認密碼 <span class="req">*</span></label>
+              <input type="password" id="regPass2" name="password2" class="form-control" autocomplete="new-password" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="regEmail">Email</label>
+              <input type="email" id="regEmail" name="email" class="form-control" autocomplete="email">
+            </div>
+            <div class="form-group">
+              <label for="regPhone">手機號碼</label>
+              <input type="tel" id="regPhone" name="phone" class="form-control" autocomplete="tel">
+            </div>
+          </div>
+          <p class="form-hint">Email 與手機請至少填一項，審核結果會寄到這裡（兩者都填時優先寄 Email）。</p>
+          <p class="form-error" id="registerError" hidden></p>
+          <button type="submit" class="btn btn--primary btn--block btn--lg">送出申請</button>
+        </form>
+        <div id="registerDone" hidden></div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="siteFooter"></footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/page-login.js"></script>
+</body>
+</html>

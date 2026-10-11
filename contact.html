@@ -5,174 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>聯絡我們 | 躍齡扶輪社官方網站</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    /* 空屋格局與地圖表單框架展示專用微調樣式 */
-    .wireframe-box {
-      border: 2px dashed #B0C4DE;
-      background-color: #F8F9FA;
-      padding: 30px;
-      text-align: center;
-      border-radius: 6px;
-      color: #666;
-      margin-top: 15px;
-    }
-    .wireframe-box p {
-      font-size: 0.95rem;
-      color: #888;
-    }
-    /* 地圖佔位框 */
-    .map-placeholder {
-      width: 100%;
-      height: 350px;
-      background-color: #EBF2FA;
-      border: 2px dashed #0077B6;
-      border-radius: 6px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #0077B6;
-      margin-top: 15px;
-    }
-    /* 諮詢表單排版 */
-    .form-wrap {
-      max-width: 700px;
-      margin: 20px auto 0 auto;
-      background: var(--bg-light);
-      padding: 30px;
-      border-radius: 8px;
-      border-top: 4px solid var(--primary-color);
-      text-align: left;
-    }
-    .form-group {
-      margin-bottom: 20px;
-    }
-    .form-group label {
-      display: block;
-      font-weight: bold;
-      color: var(--primary-color);
-      margin-bottom: 8px;
-    }
-    .form-control {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #CCC;
-      border-radius: 4px;
-      font-size: 1rem;
-    }
-    .form-control:focus {
-      border-color: var(--accent-color);
-      outline: none;
-    }
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
-    }
-    .info-card-clean {
-      background: var(--white);
-      border: 1px solid #EAEAEA;
-      border-left: 4px solid var(--secondary-color);
-      padding: 20px;
-      border-radius: 4px;
-    }
-  </style>
 </head>
-<body>
+<body data-page="contact">
 
-  <!-- 頂部導航列 (同步全站乾淨結構) -->
-  <header>
-    <div class="header-top">
-      <div class="logo">
-        <a href="index.html">
-          <div class="logo-img">Rotary</div>
-          <span>躍齡扶輪社 Official Club</span>
-        </a>
-      </div>
-      <div class="user-login-area" id="loginBtnWrap" onclick="toggleLoginModal()">
-        <div class="avatar" id="userAvatar">User</div>
-        <span class="login-text" id="loginStatusText">未登入 / 請登入</span>
-      </div>
-    </div>
+  <!-- 頁首與導覽列由 js/main.js 產生（全站共用，只需改一處） -->
+  <header id="siteHeader"></header>
 
-    <nav>
-      <ul class="nav-list">
-        <!-- A: 關於我們 -->
-        <li class="nav-item">
-          <a href="about.html">關於我們 (About Us) ▾</a>
-          <ul class="dropdown">
-            <li><a href="about.html#history">創社歷史與宗旨</a></li>
-            <li><a href="about.html#presidents">歷屆社長與幹部</a></li>
-            <li><a href="about.html#members">現任社友名錄</a></li>
-          </ul>
-        </li>
-
-        <!-- B: 最新消息 -->
-        <li class="nav-item">
-          <a href="news.html">最新消息 (News) ▾</a>
-          <ul class="dropdown">
-            <li><a href="news.html#meeting">例會時間與地點公告</a></li>
-            <li><a href="news.html#calendar">重大行事曆</a></li>
-          </ul>
-        </li>
-
-        <!-- C: 活動與展覽 -->
-        <li class="nav-item">
-          <a href="events.html">活動與展覽 (Events) ▾</a>
-          <ul class="dropdown">
-            <li><a href="events.html#gallery">活動相簿</a></li>
-            <li><a href="events.html#register">線上活動報名表單</a></li>
-          </ul>
-        </li>
-
-        <!-- D: 社友專區 -->
-        <li class="nav-item">
-          <a href="#" onclick="checkMemberAccess('portal'); return false;">社友專區 (Members Portal)</a>
-        </li>
-
-        <!-- E: 聯絡我們 (當前頁面高亮) -->
-        <li class="nav-item">
-          <a href="contact.html" style="background-color: var(--accent-color); color: var(--secondary-color);">聯絡我們 (Contact)</a>
-        </li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- 頁面標題橫幅 (空屋格局：藍底色標示區塊) -->
-  <div style="background-color: var(--primary-color); color: white; text-align: center; padding: 50px 20px; margin-bottom: 40px;">
-    <h1 style="color: var(--secondary-color); font-size: 2.2rem;">聯絡我們 (Contact)</h1>
+  <div class="page-hero">
+    <h1>聯絡我們 (Contact)</h1>
   </div>
 
-  <!-- 內容區塊 (展示動線與外框) -->
   <main class="container">
-    
+
     <!-- E1: 線上諮詢表單 -->
     <section class="content-box" id="form">
       <h3>線上諮詢與聯繫表單</h3>
-      
-      <!-- 互動表單框架 -->
       <div class="form-wrap">
+        <!-- 目前為模擬送出；未來轉寄至秘書處或社長信箱 -->
         <form onsubmit="alert('模擬發送成功！您的諮詢訊息已記錄，未來將轉寄至秘書處或社長信箱。'); return false;">
-          
+
           <div class="form-group">
             <label for="contactName">訪客姓名 / 服務單位：</label>
-            <input type="text" id="contactName" class="form-control" placeholder="請輸入姓名或友社名稱" required>
+            <input type="text" id="contactName" name="name" class="form-control" placeholder="請輸入姓名或友社名稱" autocomplete="name" required>
           </div>
 
           <div class="form-group">
             <label for="contactEmail">電子郵件 (Email)：</label>
-            <input type="email" id="contactEmail" class="form-control" placeholder="example@email.com" required>
+            <input type="email" id="contactEmail" name="email" class="form-control" placeholder="example@email.com" autocomplete="email" required>
           </div>
 
           <div class="form-group">
             <label for="contactPhone">聯絡電話 / 手機：</label>
-            <input type="tel" id="contactPhone" class="form-control" placeholder="請輸入方便聯絡之電話">
+            <input type="tel" id="contactPhone" name="phone" class="form-control" placeholder="請輸入方便聯絡之電話" autocomplete="tel">
           </div>
 
           <div class="form-group">
             <label for="contactSubject">諮詢主旨：</label>
-            <select id="contactSubject" class="form-control" required>
+            <select id="contactSubject" name="subject" class="form-control" required>
               <option value="">-- 請選擇來函事由 --</option>
               <option value="join">入社諮詢與意願洽談</option>
               <option value="visit">友社例會補出席 / 跨社聯誼邀約</option>
@@ -183,11 +52,11 @@
 
           <div class="form-group">
             <label for="contactMessage">詳細諮詢內容：</label>
-            <textarea id="contactMessage" class="form-control" rows="4" placeholder="請在此填寫您想討論或詢問的詳細內容..." required></textarea>
+            <textarea id="contactMessage" name="message" class="form-control" rows="4" placeholder="請在此填寫您想討論或詢問的詳細內容..." required></textarea>
           </div>
 
-          <div style="text-align: center; margin-top: 10px;">
-            <button type="submit" class="btn" style="width: 100%; font-size: 1.05rem;">發送諮詢訊息</button>
+          <div class="form-actions">
+            <button type="submit" class="btn btn--block btn--lg">發送諮詢訊息</button>
           </div>
 
         </form>
@@ -197,31 +66,26 @@
     <!-- E2: 例會交通與地圖 -->
     <section class="content-box" id="map">
       <h3>例會交通與地理位置</h3>
-      
-      <!-- 交通資訊卡片網格 -->
       <div class="info-grid">
         <div class="info-card-clean">
-          <h4 style="color: var(--primary-color); margin-bottom: 8px;">【 例會固定地點資訊 】</h4>
+          <div class="card-title-row"><h4>例會固定地點資訊</h4><span id="meetingTools"></span></div>
+          <div id="meetingBody"></div>
         </div>
         <div class="info-card-clean">
-          <h4 style="color: var(--primary-color); margin-bottom: 8px;">【 交通與停車指南 】</h4>
+          <div class="card-title-row"><h4>交通與停車指南</h4><span id="trafficTools"></span></div>
+          <div class="rich-text" id="trafficBody"></div>
         </div>
       </div>
 
-      <!-- 地圖佔位框 -->
-      <div class="map-placeholder">
-        <strong style="font-size: 1.1rem; margin-bottom: 5px;">【 Google 地圖互動視窗嵌入放置區 】</strong>
-      </div>
+      <!-- 地圖會依「例會地址」自動顯示 -->
+      <div id="mapBox" class="map-box"></div>
     </section>
 
   </main>
 
-  <!-- 頁腳 -->
-  <footer>
-    <p>© 2026 躍齡扶輪社官方網站示範平台 | Yue-Ling Rotary Club Demonstration Website</p>
-    <p style="font-size: 0.8rem; margin-top: 5px;">本系統架構由開發者設計，提供現任會長與幹部最便捷的內容維護體驗。</p>
-  </footer>
+  <footer id="siteFooter"></footer>
 
-  <script src="main.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/page-contact.js"></script>
 </body>
 </html>
